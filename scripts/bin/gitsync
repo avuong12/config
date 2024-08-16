@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ ${#} -gt 1 ]; then
+    echo "usage: git sync <optional-branch>"
+    echo "       leaving <optional-branch> out defaults it to \"main\""
+    exit
+fi
+
+BRANCH=main
+if [ ${#} -gt 0 ]; then
+    BRANCH=${1}
+fi
+
+git fetch upstream ${BRANCH} && git checkout ${BRANCH} && git pull upstream ${BRANCH} && git push origin ${BRANCH}
